@@ -1,0 +1,120 @@
+AllCops:
+  TargetRubyVersion: 2.2
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  Enabled: true
+
+Style/ClassCheck:
+  EnforcedStyle: kind_of?
+
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Exclude:
+    - '**/spec/**/*'
+
+Layout/IndentHash:
+  Enabled: false
+
+Layout/AlignHash:
+  Enabled: false
+
+Layout/DotPosition:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Lint/UnusedBlockArgument:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 60
+
+Style/WordArray:
+  MinSize: 19
+
+Style/SignalException:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/AndOr:
+  Enabled: false
+
+Metrics/ClassLength:
+  Max: 350
+
+Metrics/CyclomaticComplexity:
+  Max: 17
+
+Metrics/LineLength:
+  Max: 370
+
+Metrics/ParameterLists:
+  Max: 10
+
+Metrics/PerceivedComplexity:
+  Max: 18
+
+Style/GuardClause:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 60
+
+Style/Documentation:
+  Enabled: false
+
+Style/IfInsideElse:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Metrics/BlockLength:
+  Max: 345
+  Exclude:
+    - "**/*_spec.rb"
+
+Style/MixinGrouping:
+  Enabled: false
+
+Layout/IndentHeredoc:
+  Enabled: false
+
+Style/SpecialGlobalVars:
+  Enabled: false
+
+PercentLiteralDelimiters:
+  PreferredDelimiters:
+    "%":  ()
+    "%i": ()
+    "%q": ()
+    "%Q": ()
+    "%r": "{}"
+    "%s": ()
+    "%w": ()
+    "%W": ()
+    "%x": ()
+
+Security/YAMLLoad:
+  Enabled: false
