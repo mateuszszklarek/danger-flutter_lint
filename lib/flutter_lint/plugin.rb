@@ -13,21 +13,28 @@ module Danger
       if inline_mode
         send_inline_comments(violations)
       else
-        markdown(table_comments(violations))
+        markdown(summary_table(violations))
       end
     end
 
-    def table_comments(violations)
+    def send_inline_comments(violations)
+      filtered_violations = filtered_violations(violations)
+      filtered_violations.each do |violation|
+        send("warn", violation.description, file: violation.file, line: violation.line)
+      end
+    end
+
+    def summary_table(violations)
       filtered_violations = filtered_violations(violations)
 
       if filtered_violations.empty?
         return "### FlutterLint found #{filtered_violations.length} issues ✅"
       else
-        return build_table(filtered_violations)
+        return table(filtered_violations)
       end
     end
 
-    def build_table(violations)
+    def table(violations)
       table = "### FlutterLint found #{violations.length} issues ❌\n\n"
       table << "| File | Line | Rule |\n"
       table << "| ---- | ---- | ---- |\n"
@@ -37,13 +44,6 @@ module Danger
       end
 
       return table
-    end
-
-    def send_inline_comments(violations)
-      filtered_violations = filtered_violations(violations)
-      filtered_violations.each do |violation|
-        send("warn", violation.description, file: violation.file, line: violation.line)
-      end
     end
 
     def filtered_violations(violations)
