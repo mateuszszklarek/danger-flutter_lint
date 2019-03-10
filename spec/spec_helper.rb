@@ -16,6 +16,7 @@ require "bundler/setup"
 require "rspec"
 require "danger"
 require "danger_plugin"
+require "flutter_analyze_parser"
 
 RSpec.configure do |config|
   config.example_status_persistence_file_path = ".rspec_status"
@@ -40,7 +41,9 @@ end
 
 def testing_ui
   @output = StringIO.new
-  @output.winsize = -> { [20, 9999] }
+  def @output.winsize
+    [20, 9999]
+  end
 
   cork = Cork::Board.new(out: @output)
   def cork.string
