@@ -2,6 +2,10 @@ require "flutter_analyze_parser"
 
 module Danger
   class DangerFlutterLint < Plugin
+    # Enable only_modified_files
+    # Only show messages within changed files.
+    attr_accessor :only_modified_files
+
     def lint(inline_mode: false)
       unless flutter_exists?
         fail("Could not find `flutter` inside current directory")
@@ -19,6 +23,7 @@ module Danger
 
     def send_inline_comments(violations)
       filtered_violations = filtered_violations(violations)
+
       filtered_violations.each do |violation|
         send("warn", violation.description, file: violation.file, line: violation.line)
       end
@@ -28,27 +33,29 @@ module Danger
       filtered_violations = filtered_violations(violations)
 
       if filtered_violations.empty?
-        return "### FlutterLint found #{filtered_violations.length} issues ✅"
+        return "### Flutter Analyze found #{filtered_violations.length} issues ✅"
       else
-        return table(filtered_violations)
+        return markdown_table(filtered_violations)
       end
     end
 
-    def table(violations)
-      table = "### FlutterLint found #{violations.length} issues ❌\n\n"
+    def markdown_table(violations)
+      table = "### Flutter Analyze found #{violations.length} issues ❌\n\n"
       table << "| File | Line | Rule |\n"
       table << "| ---- | ---- | ---- |\n"
 
-      violations.each do |violation|
-        table << "| `#{violation.file}` | #{violation.line} | #{violation.rule} |\n"
-      end
+      return violations.reduce(table) { |acc, violation| acc << table_row(violation) }
+    end
 
-      return table
+    def table_row(violation)
+    	"| `#{violation.file}` | #{violation.line} | #{violation.rule} |\n"
     end
 
     def filtered_violations(violations)
       target_files = (git.modified_files - git.deleted_files) + git.added_files
-      return violations.select { |violation| target_files.include? violation.file }
+      filtered_violations = violations.select { |violation| target_files.include? violation.file }
+
+      return only_modified_files ? filtered_violations : violations
     end
 
     def flutter_exists?
