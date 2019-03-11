@@ -7,13 +7,17 @@ module Danger
     attr_accessor :only_modified_files
 
     def lint(inline_mode: false)
-      unless flutter_exists?
+      if flutter_exists?
+        violations = FlutterAnalyzeParser.violations(`flutter analyze`)
+        flutter_lint(inline_mode: inline_mode, violations: violations)
+      else
         fail("Could not find `flutter` inside current directory")
-        return
       end
+    end
 
-      violations = FlutterAnalyzeParser.violations(`flutter analyze`)
+    private
 
+    def flutter_lint(inline_mode:, violations: r)
       if inline_mode
         send_inline_comments(violations)
       else
@@ -48,7 +52,7 @@ module Danger
     end
 
     def table_row(violation)
-    	"| `#{violation.file}` | #{violation.line} | #{violation.rule} |\n"
+      "| `#{violation.file}` | #{violation.line} | #{violation.rule} |\n"
     end
 
     def filtered_violations(violations)
