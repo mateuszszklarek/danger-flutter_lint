@@ -17,21 +17,34 @@ Or install it yourself as:
 
 ## Usage
 
-Just add to your Dangerfile
+Just add below line to your Dangerfile
 
-```rb
+```ruby
 flutter_lint.lint
+```
+
+it's equivalent of
+
+```ruby
+flutter_lint.lint(inline_mode: false)
 ```
 
 This will add markdown table with summary into your PR.
 
 Or make Danger comment directly on the line instead of printing a Markdown table (GitHub only)
 
-```rb
+```ruby
 flutter_lint.lint(inline_mode: true)
 ```
 
-*default value for inline_mode: false
+#### Lint only added/modified files
+
+If you're dealing with a legacy project, with tons of warnings, you may want to lint only new/modified files. You can easily achieve that, setting the `only_modified_files` parameter to `true`.
+
+```ruby
+flutter_lint.only_modified_files = true
+flutter_lint.lint
+```
 
 ## Development
 
