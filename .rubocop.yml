@@ -1,7 +1,5 @@
 AllCops:
   TargetRubyVersion: 2.2
-  Exclude:
-    - '**/spec/**/*'
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
