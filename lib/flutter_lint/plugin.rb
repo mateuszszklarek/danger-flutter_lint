@@ -21,7 +21,7 @@ module Danger
     private
 
     def lint_if_report_exists(inline_mode:)
-      if report != nil
+      if !report.nil?
         violations = FlutterAnalyzeParser.violations(report)
         lint_mode(inline_mode: inline_mode, violations: violations)
       else
