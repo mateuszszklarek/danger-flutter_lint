@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "danger-plugin-api", "~> 1.0"
-  spec.add_runtime_dependency "flutter_analyze_parser", "~> 0.1"
+  spec.add_runtime_dependency "flutter_analyze_parser", "~> 0.1.1"
 
   spec.add_development_dependency "codecov", "~> 0.1"
   spec.add_development_dependency "guard-rspec", "~> 4.7"
