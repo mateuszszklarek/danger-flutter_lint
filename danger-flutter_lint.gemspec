@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = FlutterLint::VERSION
   spec.authors       = ["Mateusz Szklarek"]
   spec.email         = ["mateusz.szklarek@gmail.com"]
-  spec.summary       = "Parser for flutter analyze output"
+  spec.summary       = "A Danger Plugin to lint dart files using flutter analyze command line interface."
   spec.homepage      = "https://github.com/mateuszszklarek/danger-flutterlint"
   spec.license       = "MIT"
 
