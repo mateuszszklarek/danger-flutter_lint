@@ -17,16 +17,19 @@ Or install it yourself as:
 
 ## Usage
 
-Just add below line to your Dangerfile
+Flutter Analyze doesn't give an option to generate report but you can achieve this easily using regular shell command (locally or on CI):
 
-```ruby
-flutter_lint.lint
+```sh
+$ flutter analyze > flutter_analyze_report.txt
 ```
 
-it's equivalent of
+It will add output from `flutter analyze` command to `flutter_analyze_report.txt`.
+
+Now you need to set `report_path` and invoke `lint` in your Dangerfile.
 
 ```ruby
-flutter_lint.lint(inline_mode: false)
+flutter_lint.report_path = "flutter_analyze_report.txt"
+flutter_lint.lint // or flutter_lint.lint(inline_mode: false)
 ```
 
 This will add markdown table with summary into your PR.
@@ -43,6 +46,7 @@ If you're dealing with a legacy project, with tons of warnings, you may want to 
 
 ```ruby
 flutter_lint.only_modified_files = true
+flutter_lint.report_path = "flutter_analyze_report.txt"
 flutter_lint.lint
 ```
 
