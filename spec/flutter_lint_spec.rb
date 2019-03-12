@@ -30,19 +30,25 @@ module Danger
         end
       end
 
-      context "when flutter is installed" do
+      context "when flutter is installed and report is not set" do
         before do
           allow(@flutter_lint).to receive(:`).with("which flutter").and_return("/Users/johndoe/.flutter/bin/flutter")
         end
 
-        context "when `flutter analyze` returns no violations" do
+        it "should fail when lint" do
+          @flutter_lint.lint
+
+          expect(@flutter_lint.status_report[:errors]).to eq(["Could not run lint without report"])
+        end
+
+        context "when set `flutter analyze` report without violations" do
           before do
             stubbed_output = """
             Analyzing my_flutter_project...
 
               No issues found!
             """
-            allow(@flutter_lint).to receive(:`).with("flutter analyze").and_return(stubbed_output)
+            @flutter_lint.report = stubbed_output
           end
 
           it "should NOT fail when lint" do
@@ -66,7 +72,7 @@ module Danger
           end
         end
 
-        context "when `flutter analyze` returns some violations" do
+        context "when set `flutter analyze` report with some violations" do
           before do
             stubbed_output = """
             Analyzing my_flutter_project...
@@ -75,7 +81,7 @@ module Danger
                 info • Prefer const with constant constructors • lib/home/home_page.dart:13:13 • prefer_const_constructors
                 info • AVOID catches without on clauses • lib/profile/user/phone_widget.dart:19:7 • avoid_catches_without_on_clauses
             """
-            allow(@flutter_lint).to receive(:`).with("flutter analyze").and_return(stubbed_output)
+            @flutter_lint.report = stubbed_output
           end
 
           it "should NOT fail when lint" do
