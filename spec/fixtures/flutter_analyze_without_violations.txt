@@ -1,0 +1,5 @@
+
+Analyzing my_flutter_project...
+
+
+No issues found! (ran in 1.8s)

@@ -1,0 +1,6 @@
+
+Analyzing my_flutter_project...
+
+      info • Name types using UpperCamelCase • lib/main.dart:5:7 • camel_case_types
+      info • Prefer const with constant constructors • lib/home/home_page.dart:13:13 • prefer_const_constructors
+      info • AVOID catches without on clauses • lib/profile/user/phone_widget.dart:19:7 • avoid_catches_without_on_clauses

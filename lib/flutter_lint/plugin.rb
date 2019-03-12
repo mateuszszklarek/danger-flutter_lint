@@ -6,9 +6,9 @@ module Danger
     # Only show messages within changed files.
     attr_accessor :only_modified_files
 
-    # Report
+    # Report path
     # You should set output from `flutter analyze` here
-    attr_accessor :report
+    attr_accessor :report_path
 
     def lint(inline_mode: false)
       if flutter_exists?
@@ -21,11 +21,12 @@ module Danger
     private
 
     def lint_if_report_exists(inline_mode:)
-      if !report.nil?
+      if !report_path.nil? && File.exist?(report_path)
+        report = File.open(report_path)
         violations = FlutterAnalyzeParser.violations(report)
         lint_mode(inline_mode: inline_mode, violations: violations)
       else
-        fail("Could not run lint without report")
+        fail("Could not run lint without setting report path or report file doesn't exists")
       end
     end
 

@@ -38,17 +38,25 @@ module Danger
         it "should fail when lint" do
           @flutter_lint.lint
 
-          expect(@flutter_lint.status_report[:errors]).to eq(["Could not run lint without report"])
+          expect(@flutter_lint.status_report[:errors]).to eq(["Could not run lint without setting report path or report file doesn't exists"])
         end
 
-        context "when set `flutter analyze` report without violations" do
+        context "when report is set but file not exists" do
           before do
-            stubbed_output = """
-            Analyzing my_flutter_project...
+          allow(@flutter_lint).to receive(:`).with("which flutter").and_return("/Users/johndoe/.flutter/bin/flutter")
+          end
 
-              No issues found!
-            """
-            @flutter_lint.report = stubbed_output
+          it "should fail when lint" do
+            @flutter_lint.report_path = "users/johndoe/invalid_path/report.txt"
+            @flutter_lint.lint
+
+            expect(@flutter_lint.status_report[:errors]).to eq(["Could not run lint without setting report path or report file doesn't exists"])
+          end
+        end
+
+        context "when set `flutter analyze` report path without violations" do
+          before do
+            @flutter_lint.report_path = "spec/fixtures/flutter_analyze_without_violations.txt"
           end
 
           it "should NOT fail when lint" do
@@ -74,14 +82,7 @@ module Danger
 
         context "when set `flutter analyze` report with some violations" do
           before do
-            stubbed_output = """
-            Analyzing my_flutter_project...
-
-                info • Name types using UpperCamelCase • lib/main.dart:5:7 • camel_case_types
-                info • Prefer const with constant constructors • lib/home/home_page.dart:13:13 • prefer_const_constructors
-                info • AVOID catches without on clauses • lib/profile/user/phone_widget.dart:19:7 • avoid_catches_without_on_clauses
-            """
-            @flutter_lint.report = stubbed_output
+            @flutter_lint.report_path = "spec/fixtures/flutter_analyze_with_violations.txt"
           end
 
           it "should NOT fail when lint" do
