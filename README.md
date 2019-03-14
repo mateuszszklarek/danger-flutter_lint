@@ -1,5 +1,6 @@
 # danger-flutter_lint
 
+[![Gem](https://img.shields.io/gem/v/danger-flutter_lint.svg)](https://rubygems.org/gems/danger-flutter_lint)
 [![Build Status](https://travis-ci.org/mateuszszklarek/danger-flutter_lint.svg?branch=master)](https://travis-ci.org/mateuszszklarek/danger-flutter_lint)
 [![codecov](https://codecov.io/gh/mateuszszklarek/danger-flutter_lint/branch/master/graph/badge.svg)](https://codecov.io/gh/mateuszszklarek/danger-flutter_lint)
 
