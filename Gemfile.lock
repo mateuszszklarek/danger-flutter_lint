@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    danger-flutter_lint (0.1.0)
+    danger-flutter_lint (1.0.0)
       danger-plugin-api (~> 1.0)
       flutter_analyze_parser (~> 0.1.2)
 
