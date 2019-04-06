@@ -30,7 +30,7 @@ Now you need to set `report_path` and invoke `lint` in your Dangerfile.
 
 ```ruby
 flutter_lint.report_path = "flutter_analyze_report.txt"
-flutter_lint.lint // or flutter_lint.lint(inline_mode: false)
+flutter_lint.lint
 ```
 
 This will add markdown table with summary into your PR.
@@ -40,6 +40,8 @@ Or make Danger comment directly on the line instead of printing a Markdown table
 ```ruby
 flutter_lint.lint(inline_mode: true)
 ```
+
+Default value for `inline_mode` parameter is false.
 
 #### Lint only added/modified files
 
