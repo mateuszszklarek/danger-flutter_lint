@@ -10,11 +10,11 @@ A Danger Plugin to lint dart files using `flutter analyze` command line interfac
 
 Add this line to your application's Gemfile:
 
-	$ gem 'danger-fluter_lint'
+	$ gem 'danger-flutter_lint'
 
 Or install it yourself as:
 
-    $ gem install danger-fluter_lint
+    $ gem install danger-flutter_lint
 
 ## Usage
 
